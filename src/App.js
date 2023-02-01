@@ -1,31 +1,21 @@
-import React, {useState} from "react";
-import Recipelist from "./Recipelist";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ErrorPage from "./Sides/ErrorPage";
+import RecipeInfo from "./Sides/RecipeInfo";
+import RecipeList from "./Sides/RecipeList";
+import Main from "./Sides/Main";
 
 function App() {
 
-const diet = "vegetarien"
-const tolerance = "gluten";
-const ingredients = "tomato,cheese";
-const [recipeData, setRecipe] = useState(null);
-
-function getRecipeData(){
-
-        fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=277620b9d50e4ea4bc123f52c019e394&includeIngredients=${ingredients}&sort=min-missing-ingredients&intolerances=${tolerance}&diet=${diet}`)
-        .then((response) => response.json())
-        .then((data) => {
-        setRecipe(data);
-        console.log(data);
-    });
-    }
-
-  return (
-    <div>
-          <button onClick={() => <Router><Routes><Route exact path="/recipelist" element={() => <Recipelist recipeData = {getRecipeData}/>}/></Routes></Router>}>
-            Recipe
-          </button>
-          {recipeData && <Recipelist recipeData={recipeData}/>}
-    </div>
+return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Main />}/>
+        <Route path="/RecipeInfo/:id" element={<RecipeInfo />}/>
+        <Route path="/RecipeList" element={<RecipeList />}/>
+        <Route path="*" element={<ErrorPage />}/>
+      </Routes>
+    </Router>
   );
 }
 
