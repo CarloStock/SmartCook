@@ -22,7 +22,7 @@ export default function Main() {
 
   return (
     <div className='main'>
-      <SearchRecipe />
+      <SearchRecipe data={getData()}/>
       <input type="file" onChange={handleChange} />
       <button onClick={() => checkimage()}> Upload Picture</button>
       <PopupPicture trigger={buttonPopupPicture} setTrigger={setbuttonPopupPicture}>
@@ -59,9 +59,8 @@ export default function Main() {
 }
 */}
 
-export function SearchRecipe(){
+export function SearchRecipe({ searchrecipeData }){
   let navigate = useNavigate();
-  const [searchrecipeData, setsearchRecipeData] = useState(null);
   const [filterData, setfilterData] = useState([]);
   const handleFilter = (event) => {
     const searchinput = event.target.value
@@ -70,18 +69,8 @@ export function SearchRecipe(){
     });
     setfilterData(newFilter);
   };
-    
-  useEffect(()=> {
-    fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=2`)
-    .then((response) => response.json())
-    .then((data) => {
-    setsearchRecipeData(data);
-    console.log(data);
-    })
-    .catch((err) => console.error(err));
-}, []);
 
-    return (
+  return (
     <div>
       <div>
         <input type="text" placeholder='Search for Recipe...' onChange={handleFilter}/>
@@ -96,5 +85,23 @@ export function SearchRecipe(){
     )}
       </div>     
     </div>)
+}
+
+export function getData() {
+  const [searchrecipeData, setsearchRecipeData] = useState(null);
+
+  useEffect(()=> {
+    fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=2`)
+    .then((response) => response.json())
+    .then((data) => {
+    setsearchRecipeData(data);
+    console.log(data);
+    })
+    .catch((err) => console.error(err));
+}, []);
+
+return(
+  <div>{searchrecipeData && searchrecipeData}</div>
+);
 }
 

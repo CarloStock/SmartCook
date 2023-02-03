@@ -1,0 +1,38 @@
+export function SearchRecipe(searchrecipeData){
+  let navigate = useNavigate();
+  const [searchrecipeData, setsearchRecipeData] = useState(null);
+  const [filterData, setfilterData] = useState([]);
+  const handleFilter = (event) => {
+    const searchinput = event.target.value
+    const newFilter = searchrecipeData.filter((value) => {
+        return  value.title.toLowerCase().include(searchinput.toLowerCase());
+    });
+    setfilterData(newFilter);
+  };
+    
+  useEffect(()=> {
+    fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=2`)
+    .then((response) => response.json())
+    .then((data) => {
+    setsearchRecipeData(data);
+    console.log(data);
+    })
+    .catch((err) => console.error(err));
+}, []);
+
+    return (
+    <div>
+      <div>
+        <input type="text" placeholder='Search for Recipe...' onChange={handleFilter}/>
+      {filterData.length !== 0 && (
+        <div>
+        {filterData && filterData.results.slice(0, 15).map((listofrecipe) => {
+        return  (
+          <button onClick={() => {navigate("/RecipeInfo/" + listofrecipe.id)}}>{listofrecipe.title}</button>
+          );
+        })}
+        </div>
+    )}
+      </div>     
+    </div>)
+}
