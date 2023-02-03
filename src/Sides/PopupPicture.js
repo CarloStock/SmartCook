@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import PopupChoose from './PopupChoose';
 
-function PopupPicture(props) {
+export default function PopupPicture(props) {
 const [buttonPopupChoose, setbuttonPopupChoose] = useState(false)
 
     return (props.trigger) ? (
@@ -15,5 +15,3 @@ const [buttonPopupChoose, setbuttonPopupChoose] = useState(false)
         </div>
     ) : "";
 }
-
-export default PopupPicture
