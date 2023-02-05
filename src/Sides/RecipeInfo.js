@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 export default function RecipeInfo() {
   return (
     <div className='recipeinfo'>
-      {/*{<GetRecipeInfo />}*/}
+     {/* {<GetRecipeInfo />}*/}
     </div>
   )
 }

@@ -23,7 +23,7 @@ export default function Main() {
   return (
     <div className='main'>
       <SearchRecipe data={getData()}/>
-      <input type="file" onChange={handleChange} />
+      <input type="file" onChange={handleChange} accept="image/png, image/jpeg"/>
       <button onClick={() => checkimage()}> Upload Picture</button>
       <PopupPicture trigger={buttonPopupPicture} setTrigger={setbuttonPopupPicture}>
         <h1>Your Picture</h1>
