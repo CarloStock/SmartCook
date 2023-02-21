@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function RecipeInfo() {
   return (
     <div className='recipeinfo'>
-     {/* {<GetRecipeInfo />}*/}
+      {<GetRecipeInfo />}
     </div>
   )
 }
 
-{/*
+
 export function GetRecipeInfo(){
   let { id } = useParams()
   const [recipeInfoData, setRecipeInfoData] = useState(null);
+  let navigate = useNavigate();
     
   useEffect(()=> {
       fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=277620b9d50e4ea4bc123f52c019e394`)
@@ -25,6 +27,7 @@ export function GetRecipeInfo(){
   }, []);
   return (
   <div>
+      <button onClick={() => {navigate('/')}}>Back to Main</button>
       <div key={recipeInfoData && recipeInfoData.id}>
       <img src={recipeInfoData && recipeInfoData.image} alt="recipe"/><br />
       Title:{recipeInfoData && recipeInfoData.title}<br />
@@ -42,39 +45,3 @@ export function GetRecipeInfo(){
       </div>
   </div>)
 }
-*/}
-
-{/*
-      {(() => {
-        if (recipeInfoData && recipeInfoData.cookingMinutes === -1){
-          return(
-            <div>
-              cookingminute = 0<br />
-            </div>
-          );
-        }
-        else{
-          return(
-            <div>
-              Cooking min:{recipeInfoData && recipeInfoData.cookingMinutes}<br />
-            </div>
-          );
-        }
-      })()}
-      {(() => {
-        if (recipeInfoData && recipeInfoData.preparationMinutes === -1){
-          return(
-            <div>
-              prep.Time = 0<br />
-            </div>
-          ); 
-        }
-        else{
-          return(
-            <div>
-              Prep. time:{recipeInfoData && recipeInfoData.preparationMinutes}<br />
-            </div>
-          );
-        }
-      })()}
-      */}

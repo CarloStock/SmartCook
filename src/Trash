@@ -36,3 +36,125 @@ export function SearchRecipe(searchrecipeData){
       </div>     
     </div>)
 }
+
+
+      {(() => {
+        if (recipeInfoData && recipeInfoData.cookingMinutes === -1){
+          return(
+            <div>
+              cookingminute = 0<br />
+            </div>
+          );
+        }
+        else{
+          return(
+            <div>
+              Cooking min:{recipeInfoData && recipeInfoData.cookingMinutes}<br />
+            </div>
+          );
+        }
+      })()}
+      {(() => {
+        if (recipeInfoData && recipeInfoData.preparationMinutes === -1){
+          return(
+            <div>
+              prep.Time = 0<br />
+            </div>
+          ); 
+        }
+        else{
+          return(
+            <div>
+              Prep. time:{recipeInfoData && recipeInfoData.preparationMinutes}<br />
+            </div>
+          );
+        }
+      })()}
+
+
+
+      export function SearchRecipe(){
+        const [searchQuery, setSearchQuery] = useState('')
+        const [searchrecipeData, setsearchRecipeData] = useState([]);
+        let navigate = useNavigate();
+      
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+          fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=277620b9d50e4ea4bc123f52c019e394&number=2&query=${searchQuery}`)
+          .then((response) => response.json())
+          .then((data) => {
+          setsearchRecipeData(data.results);
+          console.log(data);
+          })
+          .catch((err) => console.error(err));
+        };
+      
+        return (
+          <div>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button type="submit">Search</button>
+            </form>
+            <ul>
+              {searchrecipeData && searchrecipeData.map((result) => (
+                <button onClick={() => {navigate("/RecipeInfo/" + result.id)}}>{result.title}</button>
+              ))}
+            </ul>
+          </div>
+          );
+      };
+
+
+
+      export function SearchIngredient(){
+        const [searchIngredients, setsearchIngredients] = useState([]);
+        const [ingredients] = useGlobalState("ingredients");
+    
+        const handleAddIngredient = (data) => {
+            if (ingredients.indexOf(data) === -1){
+            setGlobalState("ingredients", currentData => [...currentData, data])}
+        }
+      
+        const handleSubmit = async (event) => {
+        const searchIngredient = event.target.value;
+          fetch(`https://api.spoonacular.com/food/ingredients/search?apiKey=277620b9d50e4ea4bc123f52c019e394&query=${searchIngredient}&number=2`)
+          .then((response) => response.json())
+          .then((data) => {
+          setsearchIngredients(data.results);
+          return (
+            <div>
+                <ul>
+                    {searchIngredients && searchIngredients.map((result) => (
+                    <li key={result.id}><button onClick={() => {handleAddIngredient(result.name)}}>{result.name}</button></li>
+                    ))}
+                </ul>
+            </div>
+          );
+          })
+          .catch((err) => console.error(err));
+        };
+    
+        return (
+            <div>
+                <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button type="submit">Add Ingredient</button>
+                 </form>
+                 <ul>
+                    {searchIngredients && searchIngredients.map((result) => (
+                    <li key={result.id}><button onClick={() => {handleAddIngredient(result.name)}}>{result.name}</button></li>
+                    ))}
+                </ul>
+            </div>
+        );
+    };
+
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
