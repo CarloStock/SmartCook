@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState, setGlobalState } from "../state";
+import { SearchRecipe } from "./Main";
 
 export default function RecipeList() {
 
   return (
     <div className="recipelist">
+        <SearchRecipe/>
         {<GetRecipeData/>}
     </div>
 );
@@ -41,9 +43,6 @@ export function GetRecipeData(){
   return (
   <div>
       <button onClick={() => handlehistory()}>Back to Main</button>
-      {dietString}
-      {ingredientsString}
-      {intolerancesString}
       {recipeData && recipeData.results.map((listofrecipe) => (
       <div key={listofrecipe.id}>
       <button onClick={() => {navigate("/RecipeInfo/" + listofrecipe.id)}}>"Bild:"<img src={listofrecipe.image} alt="listofrecipe"/> "Name:"{listofrecipe.title}</button>

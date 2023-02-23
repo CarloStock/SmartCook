@@ -30,22 +30,22 @@ export default function Main() {
         <input type="file" onChange={handleChange} accept="image/png, image/jpeg"/>
         <button onClick={() => checkimage()}> Upload Picture</button>
       </div>
+        {<GetRecipeRandomData/>}
       <PopupPicture trigger={buttonPopupPicture} setTrigger={setbuttonPopupPicture}>
         {image && <img src={image} alt="Uploaded" width={250} height={250}/>}
         {setGlobalState("ingredients", ingredients)}
       </PopupPicture>
-        {/*{<GetRecipeRandomData/>}*/}
     </div>
   )
 }
 
-{/*
+
 export function GetRecipeRandomData(){
   const [recipeRandomData, setRecipeRandomData] = useState(null);
   let navigate = useNavigate();
     
   useEffect(()=> {
-      fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=10`)
+      fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=2`)
       .then((response) => response.json())
       .then((data) => {
       setRecipeRandomData(data);
@@ -53,19 +53,25 @@ export function GetRecipeRandomData(){
       })
       .catch((err) => console.error(err));
   }, []);
+
   return (
     <div className='randomrecipe'>
         {recipeRandomData && recipeRandomData.recipes.map((listofrecipe) => (
         <div key={listofrecipe.id}>
-        <button onClick={() => {navigate("/RecipeInfo/" + listofrecipe.id)}}>{listofrecipe.title}<br/>
-          <img src={listofrecipe.image} width={500} height={340} alt="listofrecipe"/>
+        <button className='randombutton' onClick={() => {navigate("/RecipeInfo/" + listofrecipe.id)}}>
+          <img src={listofrecipe.image} 
+          alt="Image not found"
+          onError={event => {
+            event.target.src="../images/3253638.png"
+            event.onerror = null }} width={500} height={340}/>
+          <br/>
+          {listofrecipe.title}
         </button>
         </div>
     ))}
     </div>
   )
 }
-*/}
 
 export function SearchRecipe(){
   const [searchrecipeData, setsearchRecipeData] = useState([]);

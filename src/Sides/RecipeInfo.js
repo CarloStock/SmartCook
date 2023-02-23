@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { SearchRecipe } from "./Main";
 
 export default function RecipeInfo() {
   return (
     <div className='recipeinfo'>
+      <SearchRecipe />
       {<GetRecipeInfo />}
     </div>
   )
@@ -27,11 +29,11 @@ export function GetRecipeInfo(){
   }, []);
   return (
   <div>
-      <button onClick={() => {navigate('/')}}>Back to Main</button>
+      <button onClick={() => {navigate('/RecipeList')}}>Back</button>
       <div key={recipeInfoData && recipeInfoData.id}>
       <img src={recipeInfoData && recipeInfoData.image} alt="recipe"/><br />
       Title:{recipeInfoData && recipeInfoData.title}<br />
-      Instruction:<div contentEditable='true' dangerouslySetInnerHTML={{ __html: recipeInfoData && recipeInfoData.instructions }}></div><br />
+      Instruction:<div contentEditable='true' SetInnerHTML={{ __html: recipeInfoData && recipeInfoData.instructions }}></div><br />
       Zutaten:
       {recipeInfoData && recipeInfoData.extendedIngredients.map((ingredientlist) => (
         <div key={ingredientlist.id}>

@@ -57,6 +57,7 @@ function PopupChoose(props) {
                 <input type="checkbox" onChange={() => handleChangeIntolerances("soy")}/> soy <br/>
                 <input type="checkbox" onChange={() => handleChangeIntolerances("grain")}/> grain <br/>
                 <br/>
+                    {ingredients}
                     <SearchIngredient />
                     {ingredients && ingredients.map((ing) => (
                         <div>
