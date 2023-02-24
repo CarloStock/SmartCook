@@ -6,9 +6,9 @@ import { SearchRecipe } from "./Main";
 export default function RecipeList() {
 
   return (
-    <div className="recipelist">
+    <div className="recipelistback">
+        <GetRecipeData/>
         <SearchRecipe/>
-        {<GetRecipeData/>}
     </div>
 );
 }
@@ -25,7 +25,7 @@ export function GetRecipeData(){
   
 
   useEffect(()=> {
-      fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=277620b9d50e4ea4bc123f52c019e394&includeIngredients=${ingredientsString}&sort=min-missing-ingredients&intolerances=${intolerancesString}&diet=${dietString}&number=2`)
+      fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=277620b9d50e4ea4bc123f52c019e394&includeIngredients=${ingredientsString}&sort=min-missing-ingredients&intolerances=${intolerancesString}&diet=${dietString}&number=10`)
       .then((response) => response.json())
       .then((data) => {
       setRecipeData(data);
@@ -41,13 +41,17 @@ export function GetRecipeData(){
   }
 
   return (
-  <div>
-      <button onClick={() => handlehistory()}>Back to Main</button>
+  <div className="backposition">
+    <button onClick={() => handlehistory()}>Back to Main</button>
+      <div className="recipelist">
       {recipeData && recipeData.results.map((listofrecipe) => (
-      <div key={listofrecipe.id}>
-      <button onClick={() => {navigate("/RecipeInfo/" + listofrecipe.id)}}>"Bild:"<img src={listofrecipe.image} alt="listofrecipe"/> "Name:"{listofrecipe.title}</button>
+        <div key={listofrecipe.id}>
+          <button className="randombutton" onClick={() => {navigate("/RecipeInfo/" + listofrecipe.id)}}><img src={listofrecipe.image} alt="listofrecipe" width={500} height={340}/> <br/>
+            {listofrecipe.title}
+          </button>
+        </div>
+      ))}
       </div>
-  ))}
   </div>
   )
 }
