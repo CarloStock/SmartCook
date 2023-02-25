@@ -84,7 +84,7 @@
 }
 
 .picupload {
-    position: fixed;
+    position: absolute;
     top: 6.8%;
     height: 20%;
     width: 100%;
@@ -95,7 +95,7 @@
 }
 
 .randomrecipe {
-    position: fixed;
+    position: absolute;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     background-color: wheat;
@@ -161,7 +161,7 @@
 }
 
 .backposition {
-    position: fixed;
+    position: absolute;
     top: 6.8%;
     height: 3.2%;
     width: 100%;
@@ -170,7 +170,7 @@
 }
 
 .recipelist {
-    position: fixed;
+    position: absolute;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     background-color: wheat;

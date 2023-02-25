@@ -3,6 +3,7 @@ import PopupPicture from './PopupPicture'
 import { useNavigate } from "react-router-dom";
 import { setGlobalState } from "../state";
 import './look.css';
+import replaceImage from "../images/3253638.png";
 
 export default function Main() {
   const [buttonPopupPicture, setbuttonPopupPicture] = useState(false);
@@ -43,9 +44,10 @@ export default function Main() {
 export function GetRecipeRandomData(){
   const [recipeRandomData, setRecipeRandomData] = useState(null);
   let navigate = useNavigate();
+  const errorImage = replaceImage
     
   useEffect(()=> {
-      fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=2`)
+      fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=10`)
       .then((response) => response.json())
       .then((data) => {
       setRecipeRandomData(data);
@@ -54,16 +56,18 @@ export function GetRecipeRandomData(){
       .catch((err) => console.error(err));
   }, []);
 
+  const onError = (e) => {
+    e.target.src=errorImage
+  }
+
   return (
     <div className='randomrecipe'>
         {recipeRandomData && recipeRandomData.recipes.map((listofrecipe) => (
         <div key={listofrecipe.id}>
         <button className='randombutton' onClick={() => {navigate("/RecipeInfo/" + listofrecipe.id)}}>
-          <img src={listofrecipe.image} 
-          alt="Image not found"
-          onError={event => {
-            event.target.src="../images/3253638.png"
-            event.onerror = null }} width={500} height={340}/>
+          <img src={listofrecipe.image ? listofrecipe.image : errorImage} 
+          onError={onError}
+          alt="Image not found" width={500} height={340}/>
           <br/>
           {listofrecipe.title}
         </button>
