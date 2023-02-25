@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { setGlobalState } from "../state";
 import './look.css';
 import replaceImage from "../images/3253638.png";
+import adImage from "../images/Download.png";
 
 export default function Main() {
   const [buttonPopupPicture, setbuttonPopupPicture] = useState(false);
@@ -45,9 +46,10 @@ export function GetRecipeRandomData(){
   const [recipeRandomData, setRecipeRandomData] = useState(null);
   let navigate = useNavigate();
   const errorImage = replaceImage
+  const url = 'https://www.google.com/search?'
     
   useEffect(()=> {
-      fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=10`)
+      fetch(`https://api.spoonacular.com/recipes/random?apiKey=277620b9d50e4ea4bc123f52c019e394&number=2`)
       .then((response) => response.json())
       .then((data) => {
       setRecipeRandomData(data);
@@ -57,11 +59,12 @@ export function GetRecipeRandomData(){
   }, []);
 
   const onError = (e) => {
-    e.target.src=errorImage
+    e.target.src = errorImage
   }
 
   return (
     <div className='randomrecipe'>
+        <button className='randombutton' onClick={() => window.open(url, '_blank')}><img src={adImage} alt="Image not found" width={500} height={340}/></button>
         {recipeRandomData && recipeRandomData.recipes.map((listofrecipe) => (
         <div key={listofrecipe.id}>
         <button className='randombutton' onClick={() => {navigate("/RecipeInfo/" + listofrecipe.id)}}>

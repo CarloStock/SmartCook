@@ -27,7 +27,7 @@ export function GetRecipeData(){
   
 
   useEffect(()=> {
-      fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=277620b9d50e4ea4bc123f52c019e394&includeIngredients=${ingredientsString}&sort=min-missing-ingredients&intolerances=${intolerancesString}&diet=${dietString}&number=10`)
+      fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=277620b9d50e4ea4bc123f52c019e394&includeIngredients=${ingredientsString}&sort=min-missing-ingredients&intolerances=${intolerancesString}&diet=${dietString}&number=7`)
       .then((response) => response.json())
       .then((data) => {
       setRecipeData(data);
