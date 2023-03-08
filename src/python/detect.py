@@ -3,7 +3,7 @@ import torch
 import argparse
 from cv2 import imwrite
 import detect_utils
-from basemodel.create_fasterrcnn_model import create_model
+#from basemodel.create_fasterrcnn_model import create_model
 from PIL import Image
 
 # argument parser
