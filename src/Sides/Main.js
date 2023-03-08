@@ -89,7 +89,7 @@ export function SearchRecipe(){
   return (
     <div className='search'>
       <h1>Smart Cook</h1>
-      <input className='searchbar' type="text" onChange={handleSubmit} placeholder="search Recipe..."/>
+      <input className='searchbar' type="text" onChange={handleSubmit} placeholder="Look for some tasty recipes!"/>
       {searchrecipeData && searchrecipeData.length !== 0 && (
         <div className='results'>
             {searchrecipeData && searchrecipeData.map((result) => (

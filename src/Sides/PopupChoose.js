@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import { setGlobalState, useGlobalState } from "../state";
+import { FaBackspace } from 'react-icons/fa';
 
 function PopupChoose(props) {
     let navigate = useNavigate();
@@ -42,7 +43,7 @@ function PopupChoose(props) {
     return (props.trigger) ? (
         <div className='popupchoose'>
             <div className='popupmain'>   
-                <button className='backbutton' onClick={() => handlehistory()}>Go back</button>    
+                <button className='backbutton' onClick={() => handlehistory()}><FaBackspace/></button>    
                 <br/>
                 <br/>  
                 Diets: <br/>
@@ -65,7 +66,7 @@ function PopupChoose(props) {
                         </div>
                     ))}
             </div>
-            <button className='submitbutton' onClick={() => {navigate("/RecipeList")}}>Submit</button>
+            <button className='submitbutton' style={{color: 'white'}} onClick={() => {navigate("/RecipeList")}}>Submit</button>
         </div>
       ) : "";
 }
