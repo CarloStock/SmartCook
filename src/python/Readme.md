@@ -10,6 +10,10 @@ To run the object detection, call
 
 The larger the min input size for the RCNN network, the more precise the object detection is. 1024 is recommended, but can be lowered on low performance hardware.
 
+<<<<<<< HEAD
 This script gives 2 outputs, the bounding boxes (boxes), and the labels for each of the bounding boxes (detected_images).
+=======
+This script gives 2 outputs, the bounding boxes (boxes), and the labels for each of the bounding boxes (classes).
+>>>>>>> 1f538b7661395253a7504071d8eff613b8764217
 
 
