@@ -10,11 +10,11 @@ const [buttonPopupChoose, setbuttonPopupChoose] = useState(false)
         <div className='popuppicture'>
             <div className='popupbuttons'>
                 <div className='picture'>
-                    <h1>Your Picture</h1>
+                    <h1>Your Ingredients</h1>
                     {props.children}
                 </div>
                 <button className='submitbutton' style={{color: 'white'}} onClick={() => setbuttonPopupChoose(true)}>Submit</button>
-                <button className='backbutton' onClick={() => props.setTrigger(false)}><FaBackspace/></button>
+                <button className='backbutton' style={{color: 'white'}} onClick={() => props.setTrigger(false)}><FaBackspace/></button>
                 <PopupChoose trigger={buttonPopupChoose} setTrigger={setbuttonPopupChoose}>
                 </PopupChoose>
             </div>

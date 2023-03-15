@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import { setGlobalState, useGlobalState } from "../state";
 import { FaBackspace } from 'react-icons/fa';
+import { BsFillTrashFill } from "react-icons/bs";
 
 function PopupChoose(props) {
     let navigate = useNavigate();
@@ -43,28 +44,34 @@ function PopupChoose(props) {
     return (props.trigger) ? (
         <div className='popupchoose'>
             <div className='popupmain'>   
-                <button className='backbutton' onClick={() => handlehistory()}><FaBackspace/></button>    
+                <button className='backbutton' style={{color: 'white'}} onClick={() => handlehistory()}><FaBackspace/></button>    
                 <br/>
                 <br/>  
-                Diets: <br/>
+                Are you on a diet? <br/>
                 <input type="checkbox" onChange={() => handleChangeDiet("vegetarien")}/> vegetarien <br/>
                 <input type="checkbox" onChange={() => handleChangeDiet("vegan")}/> vegan <br/>
                 <input type="checkbox" onChange={() => handleChangeDiet("gluten free")}/> gluten free <br/>
                 <input type="checkbox" onChange={() => handleChangeDiet("pescetarian")}/> pescetarian <br/>
                 <br/>
-                Intolerances: <br/>
-                <input type="checkbox" onChange={() => handleChangeIntolerances("dairy")}/> dairy <br/>
-                <input type="checkbox" onChange={() => handleChangeIntolerances("peanut")}/> peanut <br/>
-                <input type="checkbox" onChange={() => handleChangeIntolerances("soy")}/> soy <br/>
-                <input type="checkbox" onChange={() => handleChangeIntolerances("grain")}/> grain <br/>
-                <br/>
-                    <SearchIngredient />
+                Do you have any intolerances? <br/>
+                <input type="checkbox" onChange={() => handleChangeIntolerances("dairy")}/> dairy intolerance <br/>
+                <input type="checkbox" onChange={() => handleChangeIntolerances("peanut")}/> peanut intolerance <br/>
+                <input type="checkbox" onChange={() => handleChangeIntolerances("soy")}/> soy intolerance <br/>
+                <input type="checkbox" onChange={() => handleChangeIntolerances("grain")}/> grain intolerance <br/>
+                <h4>These are the ingredients we found: </h4>
+                    <br/>
+                    Did we find any ingredients that you don't have?
                     {ingredients && ingredients.map((ing) => (
                         <div>
                             {ing}
-                            <button onClick={() => {handleIngredient(ing)}}>Löschen</button>
+                            &nbsp; &nbsp;
+                            <button className='deletebutton' style={{color: 'white'}} onClick={() => {handleIngredient(ing)}}><BsFillTrashFill/></button>
                         </div>
                     ))}
+                    <br/>
+                    <br/>
+                    Did we miss any ingredients?
+                    <SearchIngredient />
             </div>
             <button className='submitbutton' style={{color: 'white'}} onClick={() => {navigate("/RecipeList")}}>Submit</button>
         </div>
