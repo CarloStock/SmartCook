@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## IMPORTANT
+
+To successfully run this project with "npm start", you first have to execute these 3 commands to install some scripts:
+
+### `npm install react-scripts --save`
+### `npm install react-hooks-global-state`
+### `npm install react-icons --save`
+
+
 ## Available Scripts
 
 In the project directory, you can run:
